@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "seal-py"
-version = "0.7.5"
+version = "0.7.8"
 description = "This lib can cipher your file"
 authors = ["Dmytro <sinica911@gmail.com>"]
 license = "MIT"
