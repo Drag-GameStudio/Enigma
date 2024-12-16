@@ -12,17 +12,13 @@ class CipherReader:
         with open(file_path, "r", encoding="utf-8") as file:
             self.file = file.read()
 
-
-    def cipher_file(self, key_code: str=None, rewrite: bool = False, key_lenght: int = 32, save: bool = True) -> tuple[str, str]:
+    def generate_key(self, key_len: int = 32):
         enigma = Enigma()
+        return enigma.generate_key(key_length=key_len)
 
-        if key_code == None:
-            key = enigma.generate_key(key_length=key_lenght)
-        else:
-            key = key_code
-
+    def cipher_file(self, key: str, rewrite: bool = False, save: bool = True) -> tuple[str, str]:
+        enigma = Enigma()
         cipher_text = enigma.cipher_text(key=key, text=self.file)
-        
         path = self.__get_path(self.file_path, "cipher")
 
         if save:
@@ -40,7 +36,7 @@ class CipherReader:
             with open(path, "w", encoding="utf-8") as file:
                 file.write(anti_cipher_text)
 
-        return anti_cipher_text
+        return key, anti_cipher_text
 
     def __get_path(self, path: str, addon_name, count_endpoints: int = 1) -> str:
         splitter = path.split(".")
