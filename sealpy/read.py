@@ -12,7 +12,8 @@ class CipherReader:
         with open(file_path, "r", encoding="utf-8") as file:
             self.file = file.read()
 
-    def generate_key(self, key_len: int = 32):
+    @classmethod
+    def generate_key(cls, key_len: int = 32):
         enigma = Enigma()
         return enigma.generate_key(key_length=key_len)
 
@@ -27,7 +28,7 @@ class CipherReader:
         
         return key, cipher_text
     
-    def anti_cipher_file(self, key: str, save: bool = True) -> str:
+    def anti_cipher_file(self, key: str, save: bool = True) -> tuple[str, str]:
         enigma = Enigma()
         anti_cipher_text = enigma.anti_cipher_text(key=key, text=self.file)
         path = self.__get_path(path=self.file_path, addon_name="test", count_endpoints=2)
@@ -46,3 +47,4 @@ class CipherReader:
 
         return output_path
     
+

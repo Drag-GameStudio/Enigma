@@ -14,8 +14,8 @@ class Enigma:
         pass
 
     def cipher_text(self, key: str, text: str) -> str:
-        offset = key[:2]
-        keyOf = key[2:]
+        offset = key[:3]
+        keyOf = key[3:]
         cipher_text = list(text)
 
         for char in range(len(cipher_text)):
@@ -39,8 +39,8 @@ class Enigma:
         return output_text
     
     def anti_cipher_text(self, key: str, text: str):
-        offset = key[:2]
-        keyOf = key[2:]
+        offset = key[:3]
+        keyOf = key[3:]
         cipher_text = list(text)
 
 
@@ -63,7 +63,7 @@ class Enigma:
     
     def generate_key(self, key_length):
         key = ""
-        key += str(random.randint(30, 50))
+        key += str(random.randint(200, 300))
         for char in range(key_length):
             key += config.SYMBWOL[random.randint(0, len(config.SYMBWOL) - 1)]
             key += str(random.randint(0, 9))
