@@ -42,9 +42,9 @@ class CipherReader:
     def __get_path(self, path: str, addon_name, count_endpoints: int = 1) -> str:
         splitter = path.split(".")
         current_path = splitter[:-count_endpoints]
-        print(current_path, splitter[len(splitter) - 1])
         output_path = f"{utilitis.get_text_from_array(arr=current_path)}.{addon_name}.{splitter[len(splitter) - 1]}"
 
         return output_path
     
+
 

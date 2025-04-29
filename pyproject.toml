@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "seal-py"
-version = "0.8.2"
+version = "0.8.4"
 description = "This lib can cipher your file"
 authors = ["Dmytro <sinica911@gmail.com>"]
 license = "MIT"
@@ -10,7 +10,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.8"
 
 
 [build-system]
