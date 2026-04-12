@@ -1,253 +1,260 @@
-# Enigma Python Library Overview
 
-The Enigma Python library is designed to provide a simple and efficient way to encrypt and decrypt data using a custom cipher. It can be used for personal or educational purposes, and it supports both command-line and programmatic usage.
+### 🚀 Powered by ADG System
+The original version of this document offers a superior layout and faster navigation. 
+**Check it out here:** [Full Documentation Interface](https://draggame-adg-frontend.hf.space/docs/adg_doc_ead162a381aeab081662cb5deae13691)
+---
 
-## Features
+# Project Overview
 
-- Custom cipher encryption and decryption
-- File encryption and decryption
-- Generate secure encryption keys
-- Supports Python 3.12 and higher
+## **Project Title**  
+Seal-Py: A File Ciphering Library  
 
-## Structure
+---
 
-The library has the following components:
+## **Project Goal**  
+Seal-Py is a Python-based library designed to provide a simple yet robust solution for encrypting and decrypting text files. The project aims to address the need for secure file ciphering by offering a lightweight and customizable encryption mechanism. This tool is particularly useful for developers and organizations seeking to protect sensitive data in text files without relying on complex or heavyweight encryption frameworks.
 
-- `cipher.py`: Defines the `Enigma` class which handles encryption and decryption.
-- `config.py`: Stores the configurable settings, such as symbols and key lengths.
-- `read.py`: Provides methods for file encryption and decryption.
-- `utilitis.py`: Contains utility functions for converting between arrays and strings.
+---
 
-## Usage
+## **Core Logic & Principles**  
+Seal-Py operates on a custom encryption algorithm implemented in the `Enigma` class, which uses a combination of key-based offset manipulation and character substitution. The encryption process involves two main steps:  
 
-To get started with the Enigma Python library, you'll need to have Python installed on your system. Then, simply install Enigma using pip:
+1. **Offset Manipulation**:  
+   - A numeric offset, derived from the first three characters of the encryption key, is applied to each character in the input text. This shifts the ASCII values of the characters, effectively scrambling them.  
 
-```python
-pip install seal-py
-```
+2. **Key-Based Substitution**:  
+   - The remaining portion of the key (`keyOf`) is used to further modify the scrambled text. Each character in the text is adjusted based on a calculated key code, which is derived from the position of the character in the text and the length of the key.  
 
+The decryption process reverses these steps, restoring the original text.  
 
-### Programmatic Usage
+Additionally, the library provides utility methods for generating encryption keys, either randomly or based on a hash input. The keys are tailored to ensure compatibility with the encryption algorithm, maintaining a balance between security and usability.  
 
-To use the Enigma library programmatically, import the classes and functions as needed. Here's an example:
+The `CipherReader` class extends the functionality by integrating file handling capabilities. It allows users to encrypt or decrypt entire text files, with options to save the output to new files or overwrite the original files.  
 
-```python
-from seal_py.read import CipherReader
+The project is implemented in Python (version 3.8 or higher) and adheres to modular programming principles, with separate modules for configuration, utilities, and core encryption logic.  
 
-# Initialize CipherReader with the file path
-cipher_reader = CipherReader("path/to/your/file.txt")
+---
 
-# Encrypt the file
-encryption_key = cipher_reader.cipher_file(rewrite=True, key_lenght=32)
+## **Key Features**  
+- **Custom Encryption Algorithm**: A lightweight and efficient ciphering mechanism based on offset manipulation and character substitution.  
+- **Key Generation**:  
+  - Random key generation with customizable length.  
+  - Key generation based on hash data for deterministic encryption.  
+- **File Encryption and Decryption**:  
+  - Encrypt and decrypt text files with ease.  
+  - Option to save the output to new files or overwrite existing files.  
+- **Utility Methods**: Helper functions for text manipulation and path generation.  
+- **Configurable Settings**: A configuration module (`config.py`) for managing encryption-related constants.  
 
-# Decrypt the file
-decrypted_text = cipher_reader.anti_cipher_file(encryption_key)
-```
+---
 
-Make sure you have the correct imports and paths set up based on your Python project structure.
-# pyproject.toml Documentation
+## **Dependencies**  
+To run Seal-Py, the following dependencies are required:  
 
-This documentation provides usage information and describes methods for the `pyproject.toml` file.
+1. **Python**: Version 3.8 or higher.  
+2. **Poetry**: Used for managing project dependencies and building the library.  
 
-## Usage
+No additional third-party libraries are required, making the project lightweight and easy to integrate into existing Python environments.  
 
-The `pyproject.toml` file is used in a Python project to configure and specify various settings. This includes package information, project metadata, dependencies, and build system settings. Here's how you can use the file:
+--- 
 
-1. **Define project metadata**: Set the name, version, description, authors, and license for your project. This information is used when publishing your package to a package repository, such as PyPI.
-2. **Specify package information**: Include the directory containing the package in the `packages` section. In this example, the `seal-py` directory is included.
-3. **List dependencies**: Define the required dependencies for your project under the `dependencies` section. In this case, `python` has been specified with a version constraint `^3.12`, indicating that the project is compatible with any Python version 3.12 and higher.
-4. **Configure build system**: Specify the required build system and build backend in the `build-system` section. This allows you to use tools like `poetry` to build your project.
+Seal-Py is a versatile and efficient solution for file encryption, offering a balance between simplicity and security. Its modular design and customizable features make it suitable for a wide range of applications, from personal data protection to enterprise-level file management systems.
+## Executive Navigation Tree
 
-## Methods
+### 📄 Core Engine
+- [Enigma Class](#enigma-class)
+- [Init Method](#init-method)
+- [Dependencies](#dependencies)
+- [Warnings](#warnings)
 
-There are no methods in the `pyproject.toml` file as it is a configuration file, not a code module. However, here's a description of important sections:
+### 🔐 Encryption & Decryption
+- [Generate Key](#generate-key)
+- [Generate Key From Hash](#generate-key-from-hash)
+- [Cipher Text](#cipher-text)
+- [Anti Cipher Text](#anti-cipher-text)
+- [Cipher File](#cipher-file)
+- [Anti Cipher File](#anti-cipher-file)
+- [Cipher Reader](#cipher-reader)
 
-- [tool.poetry]: Contains Poetry-specific configuration settings for the project.
-- [tool.poetry.name], [tool.poetry.version], [tool.poetry.description], [tool.poetry.authors] and [tool.poetry.license]: Provide information about the project name, version, description, authors, and license.
-- [tool.poetry.readme]: Specifies the `README.md` file for the project.
-- [tool.poetry.packages]: Defines the package directory to be included in the project.
-- [tool.poetry.dependencies]: Specifies the Python dependencies required for the project.
-- [build-system]: Configures the build system and build backend for building the project.
+### 📂 File Management
+- [Get Path](#get-path)
+<a name="enigma-class"></a> `Enigma` Class: Text Ciphering and Deciphering
 
-Remember, this is an additional documentation for the `pyproject.toml` file and not a full documentation.
-# seal-py/cipher.py
+The `Enigma` class is a core component responsible for encrypting and decrypting text using a key-based ciphering mechanism. It also provides methods for generating encryption keys based on random values or hash data.
 
-This documentation outlines the usage of the `Enigma` class within the `cipher.py` file. This class is meant for encrypting and decrypting text using a generated encryption key.
+---
 
-## Usage
+####
+<a name="init-method"></a> `__init__` Method: Initialization
 
-Creating an instance of the `Enigma` class:
+Initializes the `CipherReader` instance with the file path and reads the file content.
 
-```python
-enigma = Enigma()
-```
+**Inputs, Outputs, and Parameters:**
 
-### Methods
+| Entity       | Type   | Role              | Notes                                                                 |
+|--------------|--------|-------------------|-----------------------------------------------------------------------|
+| `file_path`  | `str`  | File Path         | Path to the file to be encrypted or decrypted.                       |
+| `file`       | `str`  | File Content      | Content of the file read during initialization.                      |
 
-#### `cipher_text(self, key: str, text: str) -> str`
-- **Description**: Encrypts a text string using the provided key. The resulting cipher text is returned.
-- **Arguments**:
-  - `key` (str): The encryption key.
-  - `text` (str): The text to be encrypted.
-- **Returns**: Encrypted text (str).
+---
 
-```python
-encrypted_text = enigma.cipher_text("34!2ab4", "Hello, World!")
-```
+####
+<a name="dependencies"></a> Dependencies
 
-#### `anti_cipher_text(self, key:str, text:str)`
-- **Description**: Decrypts a cipher text string using the provided key. The resulting decrypted text is returned.
-- **Arguments**:
-  - `key` (str): The decryption key.
-  - `text` (str): The cipher text to be decrypted.
-- **Returns**: Decrypted text (str).
+- **`Enigma` Class:** Provides encryption and decryption methods (`cipher_text` and `anti_cipher_text`) and key generation methods (`generate_key` and `generate_key_from_hash`).  
+- **`utilitis` Module:** Provides the `get_text_from_array` function, used to construct file paths from array components.
 
-```python
-decrypted_text = enigma.anti_cipher_text("34!2ab4", "Ifmmp, Xpsme!")
-```
+---
 
-#### `generate_key(self, key_length)`
-- **Description**: Generates a random encryption key with the specified length. The generated key can be used in the `cipher_text` method.
-- **Arguments**:
-  - `key_length` (int): Length of the key.
-- **Returns**: Generated key (str).
+###
+<a name="warnings"></a> Critical Notes
 
-```python
-key = enigma.generate_key(8)
-ciphered_text = enigma.cipher_text(key, "This is a test.")
-```
+1. **Error Handling:** The methods assume valid inputs for file paths and keys. Invalid inputs may cause runtime exceptions.  
+2. **File Operations:** Ensure the file paths provided are accessible and writable, especially when `save` or `rewrite` flags are enabled.  
+3. **Key Constraints:** The encryption and decryption keys must conform to the format defined by the `Enigma` class.
+<a name="generate-key"></a> `generate_key` Method: Key Generation
 
-Feel free to let your creativity shine while using the `Enigma` class in your projects!
-# seal-py Configuration
+Generates a random encryption key using the `Enigma` class.
 
-This documentation provides information about the `config.py` file in the seal-py project, specifically focusing on the usage and descriptions of the methods provided in the file.
+**Inputs, Outputs, and Parameters:**
 
-## SYMBWOL
+| Entity       | Type   | Role              | Notes                                                                 |
+|--------------|--------|-------------------|-----------------------------------------------------------------------|
+| `key_len`    | `int`  | Key Length        | Specifies the length of the generated key. Default is 32.            |
+| `key`        | `str`  | Generated Key     | Randomly generated encryption key.                                   |
 
-The `SYMBWOL` list is an array containing uppercase letters of the English alphabet. It is used for defining possible symbols in the Enigma cipher. For example:
+---
 
-```python
-SYMBWOL = ['A', 'B', 'C', 'D', 'E',
-           'F', 'G', 'H', 'I', 'J',
-           'K', 'L', 'M', 'N', 'O',
-           'P', 'Q', 'R', 'S', 'T',
-           'U', 'V', 'W', 'X', 'Y',
-           'Z']
-```
+####
+<a name="generate-key-from-hash"></a> `generate_key_from_hash` Method: Key Generation from Hash Data
 
-Each element in the list represents a valid symbol for the Enigma cipher. You can modify the symbols included in this list to use a custom set of letters and/or numbers for your purposes.
+Generates an encryption key based on hash data.
 
-## Usage
+> **Logic:**  
+> - Computes a numeric sum of the hash elements.  
+> - Adjusts the sum to fall within the range of 200–300.  
+> - Constructs the key using the adjusted sum and elements from the hash data.
 
-You can use the `SYMBWOL` list to configure the available symbols for the Enigma cipher. It is included in the seal-py project and can be easily imported into your code for quick reference.
+**Inputs, Outputs, and Parameters:**
 
-```python
-import config
+| Entity       | Type   | Role              | Notes                                                                 |
+|--------------|--------|-------------------|-----------------------------------------------------------------------|
+| `hash_data`  | `list` | Hash Data         | List of elements used to compute the key.                            |
+| `key`        | `str`  | Generated Key     | Key derived from hash data and adjusted sum.                         |
 
-# Example of using SYMBWOL
-for symbol in config.SYMBWOL:
-    print(symbol)
-```
+---
 
-This code snippet demonstrates how to iterate through the `SYMBWOL` list, printing each element as it goes. Feel free to modify or extend the list as needed.
+###
+<a name="cipher-text"></a> `cipher_text` Method: Text Encryption
 
-## Additional Notes
+Encrypts a given string using the provided key.
 
-Remember that the `config.py` file is just a component of the seal-py project and might not contain a full range of documentation. Make sure to refer to other documentation sources or the project's main repository for a more complete understanding of the platform.
+> **Logic:**  
+> The encryption process involves two steps:  
+> 1. **Offset Adjustment:** Each character's ASCII value is incremented by a fixed offset derived from the first three characters of the key.  
+> 2. **Key-Based Adjustment:** Each character's ASCII value is further modified based on the remaining part of the key (`keyOf`).  
 
-Enjoy coding with the seal-py Enigma cipher!
-# seal-py/read.py
+**Inputs, Outputs, and Parameters:**
 
-This module contains classes and methods for reading and encrypting files using the Enigma cipher.
+| Entity       | Type   | Role              | Notes                                                                 |
+|--------------|--------|-------------------|-----------------------------------------------------------------------|
+| `text`       | `str`  | Input Text        | The string to be encrypted.                                           |
+| `key`        | `str`  | Encryption Key    | Used to calculate the offset and key-based adjustments.               |
+| `cipher_text`| `str`  | Encrypted Output  | Resulting encrypted string after applying the ciphering algorithm.    |
 
-## Usage
+---
 
-1. Import the necessary classes and methods from the `read` module.
+####
+<a name="anti-cipher-text"></a> `anti_cipher_text` Method: Text Decryption
 
-```python
-from read import CipherReader
-```
+Decrypts a given string using the provided key.
 
-2. Create an instance of the `CipherReader` class with a file path.
+> **Logic:**  
+> The decryption process reverses the encryption steps:  
+> 1. **Key-Based Adjustment:** Each character's ASCII value is decremented based on the `keyOf` portion of the key.  
+> 2. **Offset Adjustment:** Each character's ASCII value is decremented by the fixed offset derived from the first three characters of the key.  
 
-```python
-cipher_reader = CipherReader(file_path="path/to/your/file.txt")
-```
+**Inputs, Outputs, and Parameters:**
 
-3. Encrypt a file using a random key or your own key.
+| Entity           | Type   | Role              | Notes                                                                 |
+|------------------|--------|-------------------|-----------------------------------------------------------------------|
+| `text`           | `str`  | Encrypted Input   | The string to be decrypted.                                           |
+| `key`            | `str`  | Decryption Key    | Used to reverse the offset and key-based adjustments.                 |
+| `cipher_text`    | `str`  | Decrypted Output  | Resulting decrypted string after reversing the ciphering algorithm.   |
 
-```python
-# Encrypt with a random key
-key = cipher_reader.cipher_file()
+---
 
-# Encrypt with a custom key
-custom_key = "your-custom-key"
-cipher_reader.cipher_file(key_code=custom_key)
-```
+####
+<a name="cipher-file"></a> `cipher_file` Method: File Encryption
 
-4. Decrypt a file using the appropriate key.
+Encrypts the file content using the provided key and optionally saves the encrypted content to a new file.
 
-```python
-# Decrypt using the previously generated key
-decrypted_file = cipher_reader.anti_cipher_file(key=key)
+> **Logic:**  
+> - Uses the `Enigma.cipher_text` method to encrypt the file content.  
+> - Determines the save path using the `__get_path` method.  
+> - Saves the encrypted content if `save` is `True`.
 
-# Decrypt using a custom key
-cipher_reader.anti_cipher_file(key=custom_key)
-```
+**Inputs, Outputs, and Parameters:**
 
-## Methods
+| Entity       | Type     | Role              | Notes                                                                 |
+|--------------|----------|-------------------|-----------------------------------------------------------------------|
+| `key`        | `str`    | Encryption Key    | Key used to encrypt the file content.                                |
+| `rewrite`    | `bool`   | Rewrite Flag      | Determines whether to overwrite the original file. Default is `False`.|
+| `save`       | `bool`   | Save Flag         | Determines whether to save the encrypted file. Default is `True`.    |
+| `cipher_text`| `str`    | Encrypted Content | Resulting encrypted file content.                                    |
+| `path`       | `str`    | Save Path         | Path to save the encrypted file.                                     |
 
-### `__init__(self, file_path: str)`
+---
 
-Initializes the `CipherReader` instance by setting the file path. It reads the file contents for future encryption or decryption.
+####
+<a name="anti-cipher-file"></a> `anti_cipher_file` Method: File Decryption
 
-Parameter: `file_path` - The path to the file being read.
+Decrypts the file content using the provided key and optionally saves the decrypted content to a new file.
 
-### `cipher_file(self, key_code: str=None, rewrite: bool = False, key_lenght: int = 32) -> str`
+> **Logic:**  
+> - Uses the `Enigma.anti_cipher_text` method to decrypt the file content.  
+> - Determines the save path using the `__get_path` method.  
+> - Saves the decrypted content if `save` is `True`.
 
-Encrypts the file content using the Enigma cipher. It either uses a randomly generated key or a custom key provided by the user.
+**Inputs, Outputs, and Parameters:**
 
-Parameters:
-- `key_code` - The custom key for encryption. If `None` (default), a random key will be generated.
-- `rewrite` - If `True`, the encrypted content will overwrite the original file. If `False` (default), a new file will be created.
-- `key_length` - The key length for the random key generation (default: 32).
+| Entity             | Type     | Role              | Notes                                                                 |
+|--------------------|----------|-------------------|-----------------------------------------------------------------------|
+| `key`              | `str`    | Decryption Key    | Key used to decrypt the file content.                                |
+| `save`             | `bool`   | Save Flag         | Determines whether to save the decrypted file. Default is `True`.    |
+| `anti_cipher_text` | `str`    | Decrypted Content | Resulting decrypted file content.                                    |
+| `path`             | `str`    | Save Path         | Path to save the decrypted file.                                     |
 
-Returns: The key used for encryption.
+---
 
-### `anti_cipher_file(self, key: str)`
+####
+<a name="cipher-reader"></a> `CipherReader` Class: File Encryption and Decryption
 
-Decrypts the file content using the Enigma cipher.
+The `CipherReader` class provides functionality to encrypt and decrypt files using the `Enigma` cipher. It also includes methods for generating encryption keys and managing file paths for saving encrypted and decrypted files.
 
-Parameter: `key` - The key used for decryption.
+---
 
-### `__get_path(self, path: str, addon_name, count_endpoints: int = 1) -> str`
+####
+<a name="get-path"></a> `__get_path` Method: File Path Management
 
-Helper method for creating the output file path based on the original file path. It splits the file path, removes the specified number of endpoints, and adds the specified `addon_name` to the file name.
+Generates a new file path with an added suffix and optional endpoint trimming.
 
-Parameters:
-- `path` - The original file path.
-- `addon_name` - The name of the addon for the new file.
-- `count_endpoints` - Number of endpoints to remove from the original file path (default: 1).
-# utils.py
+> **Logic:**  
+> - Splits the original file path into components.  
+> - Trims the specified number of endpoints.  
+> - Appends the specified suffix to the file name.
 
-This module provides utility functions to assist with various tasks in the Seal-Py library. The current utility provided is `get_text_from_array`.
+**Inputs, Outputs, and Parameters:**
 
-## sealpy_utilitis.get_text_from_array
+| Entity            | Type     | Role              | Notes                                                                 |
+|-------------------|----------|-------------------|-----------------------------------------------------------------------|
+| `path`            | `str`    | Original Path     | Path to the original file.                                           |
+| `addon_name`      | `str`    | Suffix            | Suffix to append to the file name.                                   |
+| `count_endpoints` | `int`    | Endpoint Count    | Number of endpoints to trim from the original path. Default is `1`.  |
+| `output_path`     | `str`    | Generated Path    | New file path with the appended suffix.                              |
 
-```python
-def get_text_from_array(arr: list) -> str
-```
+---
 
-- **Description:** This utility function concatenates the characters from a list of characters (a 1-dimensional array) into a single string.
-- **Parameters:**
-    - `arr` (list): A list containing characters as elements.
-- **Returns:**
-    - `exit_str` (str): The concatenated string created from the input list of characters.
-- **Usage:**
-    ```python
-    from sealpy.utilitis import get_text_from_array
+###
+
     
-    char_list = ['h', 'e', 'l', 'l', 'o']
-    text = get_text_from_array(char_list)
-    assert text == 'hello'
-    ```
