@@ -1,6 +1,6 @@
 
         
-project_name: "Enigma"
+project_name: "Project"
 language: "en"
 
 ignore_files:
@@ -13,9 +13,10 @@ ignore_files:
   - ".mypy_cache"
   - ".auto_doc_cache"
   - ".auto_doc_cache_file.json"
-  - "dist"
 
   # Environments and IDE settings
+  - "dist"
+  - "build"
   - "venv"
   - "env"
   - ".venv"
